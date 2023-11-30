@@ -1,5 +1,3 @@
-import fetch from "isomorphic-fetch";
-import util from "util";
 import fs from "fs";
 
 require("dotenv-safe").config();
