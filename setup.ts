@@ -4,10 +4,11 @@ import fs from "fs";
 
 require("dotenv-safe").config();
 
+const year = process.env.YEAR;
 const sessionCookie = process.env.SESSION_COOKIE;
 
 const inputUrl = (day: number) =>
-  `https://adventofcode.com/2022/day/${day}/input`;
+  `https://adventofcode.com/${year}/day/${day}/input`;
 
 const day = Number(process.argv[2]);
 if (isNaN(day)) {

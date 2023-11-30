@@ -3,12 +3,13 @@ import util from "util";
 
 require("dotenv-safe").config();
 
+const year = process.env.YEAR;
 const leaderboardId = process.env.LEADERBOARD_ID;
 
 const sessionCookie = process.env.SESSION_COOKIE;
 const highlightNames = (process.env.HIGHLIGHT_NAMES || "").split(",");
 
-const url = `https://adventofcode.com/2022/leaderboard/private/view/${leaderboardId}.json`;
+const url = `https://adventofcode.com/${year}/leaderboard/private/view/${leaderboardId}.json`;
 
 interface CompletionDayTs {
   get_star_ts: number;
@@ -71,23 +72,26 @@ const parseCompletionData = (data: CompletionDataRaw) => {
   return Object.entries(data).reduce((acc, [day, dayData]) => {
     return {
       ...acc,
-      [day]: Object.entries(dayData).reduce((sacc, [star, { get_star_ts }]) => {
-        const s = `${new Date(get_star_ts * 1000).toLocaleString()}`;
-        if (star === "2") {
-          const star1Ts = data[day]["1"].get_star_ts;
-          const diff = Math.ceil(get_star_ts - star1Ts);
-          const diffh = Math.floor(diff / 3600);
-          const diffm = Math.floor((diff % 3600) / 60);
-          const diffs = diff % 60;
-          if (diffh > 0) {
-            return { ...sacc, [star]: `${s} (+${diffh}h${diffm}m${diffs}s)` };
-          } else if (diffm > 0) {
-            return { ...sacc, [star]: `${s} (+${diffm}m${diffs}s)` };
+      [day]: Object.entries(dayData).reduce(
+        (sacc, [star, { get_star_ts }]) => {
+          const s = `${new Date(get_star_ts * 1000).toLocaleString()}`;
+          if (star === "2") {
+            const star1Ts = data[day]["1"].get_star_ts;
+            const diff = Math.ceil(get_star_ts - star1Ts);
+            const diffh = Math.floor(diff / 3600);
+            const diffm = Math.floor((diff % 3600) / 60);
+            const diffs = diff % 60;
+            if (diffh > 0) {
+              return { ...sacc, [star]: `${s} (+${diffh}h${diffm}m${diffs}s)` };
+            } else if (diffm > 0) {
+              return { ...sacc, [star]: `${s} (+${diffm}m${diffs}s)` };
+            }
+            return { ...sacc, [star]: `${s} (+${diffs}s)` };
           }
-          return { ...sacc, [star]: `${s} (+${diffs}s)` };
-        }
-        return { ...sacc, [star]: s };
-      }, {} as { [key: string]: string }),
+          return { ...sacc, [star]: s };
+        },
+        {} as { [key: string]: string }
+      ),
     };
   }, {} as CompletionData);
 };
