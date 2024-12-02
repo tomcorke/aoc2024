@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "Advent of Code 2024",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "start": "nodemon",
     "built": "node ./build/",
-    "report": "ts-node ./report.ts",
-    "setup": "ts-node ./setup.ts"
+    "report": "ts-node-esm ./report.ts",
+    "setup": "ts-node-esm ./setup.ts"
   },
   "repository": {
     "type": "git",
@@ -23,17 +24,19 @@
   "homepage": "https://github.com/tomcorke/aoc2024#readme",
   "devDependencies": {
     "@types/clear": "^0.1.4",
+    "@types/dotenv-safe": "^8.1.6",
     "@types/lodash": "^4.14.202",
-    "@types/node": "^20.10.1",
+    "@types/node": "^20.17.9",
     "nodemon": "^3.0.1",
     "prettier": "^3.1.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.3.2"
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "chalk": "^4.1.2",
     "clear": "^0.1.0",
     "dotenv-safe": "^8.2.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "open": "^10.1.0"
   }
 }

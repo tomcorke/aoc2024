@@ -1,5 +1,5 @@
-import { readFileSeparated, toNumber, expect } from "../helpers";
-import { Solution } from "..";
+import { readFileSeparated, toNumber, expect } from "../helpers.js";
+import { Solution } from "../index.js";
 
 const DAY = "{DAY}";
 

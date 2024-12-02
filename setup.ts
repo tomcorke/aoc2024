@@ -1,12 +1,14 @@
 import fs from "fs";
+import open from "open";
 
-require("dotenv-safe").config();
+(await import("dotenv-safe")).config();
 
 const year = process.env.YEAR;
 const sessionCookie = process.env.SESSION_COOKIE;
 
 const inputUrl = (day: number) =>
   `https://adventofcode.com/${year}/day/${day}/input`;
+const dayUrl = (day: number) => `https://adventofcode.com/${year}/day/${day}`;
 
 const day = Number(process.argv[2]);
 if (isNaN(day)) {
@@ -43,6 +45,9 @@ console.log("Fetching input...");
   });
   const text = await res.text();
   fs.writeFileSync(`${dayPath}/input`, text);
+
+  console.log(`Opening ${dayUrl(day)}`);
+  open(dayUrl(day));
 
   console.log("Done!");
 })();
