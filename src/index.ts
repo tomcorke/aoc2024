@@ -1,4 +1,9 @@
+import { dirname } from "path";
 import { performance } from "perf_hooks";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 type Answer = string | number | number[];
 type AsyncAnswer = Promise<Answer>;
@@ -21,7 +26,7 @@ const dayString = args[0].padStart(2, "0");
 
 let solution: Solution | undefined;
 try {
-  solution = require(`./${dayString}/`).default;
+  solution = (await import(`./${dayString}/index.js`)).default;
 } catch (e: any) {
   console.error(`Error loading solution for day ${args[0]}:`, e.message);
   process.exit(1);
