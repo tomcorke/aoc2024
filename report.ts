@@ -1,6 +1,6 @@
 import util from "util";
 
-require("dotenv-safe").config();
+(await import("dotenv-safe")).config();
 
 const year = process.env.YEAR;
 const leaderboardId = process.env.LEADERBOARD_ID;
