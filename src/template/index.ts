@@ -1,5 +1,6 @@
 import { readFileSeparated, toNumber, expect } from "../helpers.js";
 import { Solution } from "../index.js";
+import chalk from "chalk";
 
 const DAY = "{DAY}";
 
