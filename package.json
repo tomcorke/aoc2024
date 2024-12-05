@@ -8,8 +8,8 @@
     "build": "tsc",
     "start": "nodemon",
     "built": "node ./build/",
-    "report": "ts-node-esm ./report.ts",
-    "setup": "ts-node-esm ./setup.ts"
+    "report": "tsx ./report.ts",
+    "setup": "tsx ./setup.ts"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
     "clear": "^0.1.0",
     "dotenv-safe": "^8.2.0",
     "lodash": "^4.17.21",
-    "open": "^10.1.0"
+    "open": "^10.1.0",
+    "tsx": "^4.19.2"
   }
 }
